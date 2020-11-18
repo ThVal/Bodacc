@@ -14,7 +14,6 @@ test = ''
 de.download()
 de.extract_tar()
 
-
 """ get element tree module to iter on xml files """
 tree = et.parse('RCS-A_BXA20200102.xml')
 root = tree.getroot()
@@ -24,15 +23,13 @@ for i in root.iter("avis"):
     root1 = i
     s_numero_identification = funct_pool.get_personnes(root1)
 
-for siren in s_numero_identification:
-    api_request(siren)
+for siren in range(len(s_numero_identification)):
+    api_request(s_numero_identification[siren])
 
 df_control = pd.DataFrame({
     'numero d identification': len(s_numero_identification),
-}, index=["nb_lignes"]).T
+}, index=["nb_lignes"])
 
 df_final = pd.DataFrame({
     'Num RCS': s_numero_identification
 })
-
-# print(df_final)
